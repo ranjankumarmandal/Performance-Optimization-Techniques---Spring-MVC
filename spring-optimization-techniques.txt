@@ -2,3 +2,18 @@
 SPRING MVC & SPRING BOOT PERFORMANCE OPTIMIZATION TECHNIQUES
 Staff Engineer Comprehensive Guide
 ================================================================================
+
+TABLE OF CONTENTS
+-----------------
+1. JVM & Memory Optimization
+2. Spring Boot Configuration Optimization
+3. Spring MVC Performance Optimization
+4. Database & Data Access Optimization
+5. Caching Strategies
+6. Asynchronous Processing
+7. Connection Pooling
+8. HTTP & REST Optimization
+9. Security Performance
+10. Monitoring & Observability
+11. Build & Deployment Optimization
+12. Architecture Patterns for Performance
