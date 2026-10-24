@@ -54,3 +54,45 @@ TABLE OF CONTENTS
 - Tiered compilation: -XX:+TieredCompilation
 - C2 compilation threshold: -XX:CompileThreshold=10000
 - Use -XX:+PrintCompilation for debugging
+
+================================================================================
+2. SPRING BOOT CONFIGURATION OPTIMIZATION
+================================================================================
+
+2.1 LAZY INITIALIZATION
+- Enable: spring.main.lazy-initialization=true
+- Reduces startup time by initializing beans on demand
+- Trade-off: first request latency may increase
+
+2.2 AUTO-CONFIGURATION EXCLUSION
+- Exclude unnecessary auto-configurations:
+  @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
+- Use @ConditionalOnProperty to disable features
+- Review actuator endpoints and disable unused ones
+
+2.3 COMPONENT SCAN OPTIMIZATION
+- Limit component scan scope: @ComponentScan(basePackages = {"com.example"})
+- Use @ComponentScan.Filter to exclude unnecessary packages
+- Avoid scanning large package trees
+
+2.4 BEAN SCOPING
+- Use prototype scope for stateful beans
+- Use request scope for web-specific beans
+- Avoid singleton for beans with mutable state
+- Consider @RefreshScope for configuration updates
+
+2.5 PROFILE-SPECIFIC CONFIGURATION
+- Use application-prod.yml for production-specific settings
+- Enable production profile: spring.profiles.active=prod
+- Separate dev/test configurations
+
+2.6 STARTUP OPTIMIZATION
+- spring.main.lazy-initialization=true
+- spring.main.allow-bean-definition-overriding=false
+- spring.main.register-shutdown-hook=false (if not needed)
+- Use spring-boot-starter-webflux instead of spring-boot-starter-web for reactive
+
+2.7 PROPERTY LOADING
+- Use spring.config.import to load specific config files
+- Disable unnecessary config locations: spring.config.location
+- Use spring.config.additional-location for overrides
