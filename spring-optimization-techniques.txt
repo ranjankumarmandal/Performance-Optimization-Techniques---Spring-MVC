@@ -246,3 +246,43 @@ TABLE OF CONTENTS
 - Track eviction rates
 - Monitor cache size
 - Use Micrometer metrics
+
+================================================================================
+6. ASYNCHRONOUS PROCESSING
+================================================================================
+
+6.1 SPRING ASYNC
+- Enable: @EnableAsync
+- Configure executor: @Bean Executor asyncExecutor
+- Use @Async on methods
+- Configure thread pool: ThreadPoolTaskExecutor
+  - corePoolSize: number of CPU cores
+  - maxPoolSize: 2x corePoolSize
+  - queueCapacity: 1000
+  - keepAliveSeconds: 60
+
+6.2 SPRING WEBFLUX
+- Use reactive stack for I/O-bound applications
+- Use Netty instead of Tomcat: spring.main.web-application-type=reactive
+- Use Mono<> for single values, Flux<> for streams
+- Backpressure handling
+- Non-blocking I/O operations
+
+6.3 MESSAGE QUEUES
+- Use RabbitMQ for reliable messaging
+- Use Kafka for high-throughput streaming
+- Configure prefetch count
+- Use dead letter queues
+- Implement proper error handling
+
+6.4 SCHEDULING
+- Use @Scheduled with fixedRate/fixedDelay
+- Configure TaskScheduler for complex scheduling
+- Use cron expressions for precise timing
+- Consider distributed scheduling with Quartz
+
+6.5 EVENT-DRIVEN ARCHITECTURE
+- Use ApplicationEvent for internal events
+- Use @EventListener for event handling
+- Configure @Async for event listeners
+- Use @TransactionalEventListener for transaction-bound events
