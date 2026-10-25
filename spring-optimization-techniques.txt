@@ -405,3 +405,46 @@ TABLE OF CONTENTS
 - Disable for stateless APIs: csrf().disable()
 - Enable for stateful applications
 - Use proper token storage
+
+================================================================================
+10. MONITORING & OBSERVABILITY
+================================================================================
+
+10.1 ACTUATOR ENDPOINTS
+- Enable actuator: spring-boot-starter-actuator
+- Expose specific endpoints: management.endpoints.web.exposure.include=health,metrics,prometheus
+- Disable sensitive endpoints in production
+- Configure endpoint security
+
+10.2 METRICS
+- Use Micrometer for metrics:
+  - Enable: spring-boot-starter-actuator
+  - Configure: management.metrics.export.prometheus.enabled=true
+- Track custom metrics with @Timed, @Counted
+- Monitor JVM metrics (memory, GC, threads)
+- Monitor HTTP metrics (requests, response times)
+
+10.3 DISTRIBUTED TRACING
+- Use Spring Cloud Sleuth for tracing
+- Integrate with Zipkin or Jaeger
+- Configure sampling rate
+- Trace async operations
+
+10.4 LOGGING
+- Use async logging: Log4j2 AsyncLogger
+- Configure appropriate log levels
+- Use structured logging (JSON format)
+- Avoid excessive logging in hot paths
+- Use MDC for context
+
+10.5 HEALTH CHECKS
+- Implement custom health indicators
+- Check dependencies (database, cache, message queue)
+- Configure health check timeouts
+- Use liveness and readiness probes
+
+10.6 PROFILING
+- Use Java Flight Recorder (JFR) for profiling
+- Enable JFR: -XX:StartFlightRecording
+- Use async-profiler for CPU profiling
+- Use VisualVM for monitoring
