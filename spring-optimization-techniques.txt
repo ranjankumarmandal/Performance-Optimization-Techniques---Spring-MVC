@@ -448,3 +448,49 @@ TABLE OF CONTENTS
 - Enable JFR: -XX:StartFlightRecording
 - Use async-profiler for CPU profiling
 - Use VisualVM for monitoring
+
+================================================================================
+11. BUILD & DEPLOYMENT OPTIMIZATION
+================================================================================
+
+11.1 MAVEN OPTIMIZATION
+- Enable parallel builds: mvn -T 4
+- Use dependency management for consistent versions
+- Exclude unnecessary dependencies
+- Use maven-compiler-plugin optimization:
+  <useIncrementalCompilation>false</useIncrementalCompilation>
+- Configure proper memory: MAVEN_OPTS=-Xmx1024m
+
+11.2 GRADLE OPTIMIZATION
+- Enable configuration cache: --configuration-cache
+- Use parallel execution: --parallel
+- Enable build cache: --build-cache
+- Use dependency locking
+- Configure JVM args for Gradle daemon
+
+11.3 DOCKER OPTIMIZATION
+- Use multi-stage builds
+- Minimize layers in Dockerfile
+- Use .dockerignore
+- Use Alpine images (smaller footprint)
+- Enable BuildKit for faster builds
+
+11.4 SPRING BOOT EXECUTABLE JAR
+- Use layered JARs for Docker: spring-boot-maven-plugin (layers)
+- Extract dependencies for faster startup
+- Consider native image with GraalVM:
+  - Requires significant configuration
+  - Faster startup, lower memory
+  - Trade-offs: reflection, dynamic class loading limitations
+
+11.5 JVM STARTUP OPTIMIZATION
+- Use AppCDS (Application Class-Data Sharing)
+- Enable: -XX:SharedArchiveFile=app.jsa
+- Use -Xshare:off for development, -Xshare:auto for production
+- Consider AOT compilation with Spring AOT
+
+11.6 DEPLOYMENT STRATEGIES
+- Use blue-green deployment for zero downtime
+- Implement canary releases
+- Use rolling updates
+- Configure proper health checks
