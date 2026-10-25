@@ -145,3 +145,60 @@ TABLE OF CONTENTS
 - Implement global exception handler with @ControllerAdvice
 - Return appropriate HTTP status codes
 - Avoid stack traces in production responses
+
+================================================================================
+4. DATABASE & DATA ACCESS OPTIMIZATION
+================================================================================
+
+4.1 CONNECTION POOLING
+- Use HikariCP (default in Spring Boot 2.x+):
+  spring.datasource.hikari.maximum-pool-size=20
+  spring.datasource.hikari.minimum-idle=10
+  spring.datasource.hikari.idle-timeout=30000
+  spring.datasource.hikari.connection-timeout=20000
+  spring.datasource.hikari.max-lifetime=1800000
+- Configure pool size based on database capacity
+- Monitor pool metrics
+
+4.2 JPA OPTIMIZATION
+- Enable batch inserts: spring.jpa.properties.hibernate.jdbc.batch_size=50
+- Use second-level cache: spring.jpa.properties.hibernate.cache.use_second_level_cache=true
+- Configure query cache: spring.jpa.properties.hibernate.cache.use_query_cache=true
+- Use @Cacheable on frequently accessed entities
+- Enable statistics in development: spring.jpa.properties.hibernate.generate_statistics=true
+
+4.3 LAZY LOADING
+- Use @ManyToOne(fetch = FetchType.LAZY)
+- Use @OneToMany(fetch = FetchType.LAZY)
+- Avoid N+1 query problem with JOIN FETCH
+- Use EntityGraph for complex queries
+
+4.4 QUERY OPTIMIZATION
+- Use @Query with native SQL for complex queries
+- Create proper database indexes
+- Use pagination: Pageable, PageRequest
+- Avoid SELECT * - specify needed columns
+- Use projection interfaces for partial data
+
+4.5 TRANSACTION MANAGEMENT
+- Use @Transactional(readOnly = true) for read operations
+- Set appropriate isolation levels
+- Keep transactions short
+- Avoid nested transactions
+- Use @Transactional(propagation = Propagation.REQUIRES_NEW) when needed
+
+4.6 DATABASE-SPECIFIC OPTIMIZATION
+- MySQL: use InnoDB, configure innodb_buffer_pool_size
+- PostgreSQL: configure shared_buffers, work_mem
+- Use connection pooling at database level
+- Enable query logging in development only
+
+4.7 JDBC TEMPLATE
+- Use JdbcTemplate for simple queries (faster than JPA)
+- Batch operations with JdbcTemplate.batchUpdate
+- Use SimpleJdbcInsert for inserts
+
+4.8 FLYWAY/LIQUIBASE OPTIMIZATION
+- Disable in production if schema is stable: spring.flyway.enabled=false
+- Use baseline version for existing databases
+- Group migrations to reduce round trips
