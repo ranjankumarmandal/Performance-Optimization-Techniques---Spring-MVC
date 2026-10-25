@@ -494,3 +494,56 @@ TABLE OF CONTENTS
 - Implement canary releases
 - Use rolling updates
 - Configure proper health checks
+
+================================================================================
+12. ARCHITECTURE PATTERNS FOR PERFORMANCE
+================================================================================
+
+12.1 MICROSERVICES
+- Decompose monolith into bounded contexts
+- Use API Gateway for routing
+- Implement service discovery (Eureka, Consul)
+- Use circuit breakers (Resilience4j)
+- Implement bulkhead patterns
+
+12.2 CQRS (COMMAND QUERY RESPONSIBILITY SEPARATION)
+- Separate read and write models
+- Use different databases for reads and writes
+- Implement event sourcing for write model
+- Use materialized views for read model
+
+12.3 EVENT-DRIVEN ARCHITECTURE
+- Use domain events for loose coupling
+- Implement eventual consistency
+- Use message brokers for reliable delivery
+- Implement saga pattern for distributed transactions
+
+12.4 STRangler Fig Pattern
+- Gradually replace legacy system
+- Use facade pattern for routing
+- Implement feature flags
+- Monitor performance during migration
+
+12.5 BACKEND FOR FRONTEND (BFF)
+- Create dedicated APIs for different clients
+- Optimize data format per client
+- Implement client-specific caching
+- Use GraphQL for flexible queries
+
+12.6 CACHE-ASIDE PATTERN
+- Application manages cache
+- Read: check cache, if miss, load from DB, update cache
+- Write: update DB, invalidate cache
+- Consider write-through for frequently updated data
+
+12.2 READ REPLICAS
+- Use read replicas for scaling read operations
+- Configure data source routing
+- Implement eventual consistency handling
+- Monitor replication lag
+
+12.3 SHARDING
+- Horizontal partitioning of data
+- Use consistent hashing for distribution
+- Implement cross-shard queries carefully
+- Consider rebalancing strategies
