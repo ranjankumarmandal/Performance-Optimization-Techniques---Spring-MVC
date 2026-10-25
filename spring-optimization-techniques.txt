@@ -202,3 +202,47 @@ TABLE OF CONTENTS
 - Disable in production if schema is stable: spring.flyway.enabled=false
 - Use baseline version for existing databases
 - Group migrations to reduce round trips
+
+================================================================================
+5. CACHING STRATEGIES
+================================================================================
+
+5.1 SPRING CACHE ABSTRACTION
+- Enable caching: @EnableCaching
+- Use @Cacheable for read-heavy operations
+- Use @CachePut for updates
+- Use @CacheEvict for invalidation
+- Configure cache manager: @Bean CacheManager
+
+5.2 CACHE IMPLEMENTATIONS
+- Caffeine (recommended for local cache):
+  spring.cache.type=caffeine
+  spring.cache.caffeine.spec=maximumSize=1000,expireAfterWrite=10m
+- Redis for distributed cache:
+  spring.cache.type=redis
+  spring.redis.timeout=60000
+- Hazelcast for clustering
+- Ehcache for simple use cases
+
+5.3 CACHE KEY STRATEGIES
+- Custom key generators: @Cacheable(keyGenerator = "customKeyGenerator")
+- Use SpEL expressions: @Cacheable(key = "#user.id")
+- Consider key collision scenarios
+
+5.4 CACHE EVICTION
+- Time-based eviction: expireAfterWrite, expireAfterAccess
+- Size-based eviction: maximumSize
+- Manual eviction: @CacheEvict(allEntries = true)
+- Use @Caching for multiple cache operations
+
+5.5 CACHE TIERING
+- Multi-level caching (L1: local, L2: distributed)
+- Cache-aside pattern
+- Read-through/write-through patterns
+- Consider cache warming strategies
+
+5.6 CACHE MONITORING
+- Monitor hit ratio
+- Track eviction rates
+- Monitor cache size
+- Use Micrometer metrics
