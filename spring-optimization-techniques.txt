@@ -547,3 +547,37 @@ TABLE OF CONTENTS
 - Use consistent hashing for distribution
 - Implement cross-shard queries carefully
 - Consider rebalancing strategies
+
+================================================================================
+ADDITIONAL BEST PRACTICES
+================================================================================
+
+- Code Review Checklist:
+  - Are database queries optimized?
+  - Is caching used appropriately?
+  - Are transactions properly scoped?
+  - Is connection pooling configured?
+  - Are async operations used for I/O-bound tasks?
+  - Is monitoring in place?
+
+- Performance Testing:
+  - Use JMeter or Gatling for load testing
+  - Test with realistic data volumes
+  - Monitor during tests
+  - Identify bottlenecks before production
+
+- Continuous Performance Monitoring:
+  - Set up alerts for key metrics
+  - Track performance trends
+  - Conduct regular performance audits
+  - Use APM tools (New Relic, Dynatrace, Datadog)
+
+- Common Anti-Patterns to Avoid:
+  - N+1 query problem
+  - Excessive database round trips
+  - Large transactions
+  - Synchronous I/O in hot paths
+  - Over-caching (stale data)
+  - Premature optimization
+  - Ignoring memory leaks
+  - Not monitoring production
