@@ -1,6 +1,5 @@
 ================================================================================
 SPRING MVC & SPRING BOOT PERFORMANCE OPTIMIZATION TECHNIQUES
-Staff Engineer Comprehensive Guide
 ================================================================================
 
 TABLE OF CONTENTS
@@ -96,3 +95,53 @@ TABLE OF CONTENTS
 - Use spring.config.import to load specific config files
 - Disable unnecessary config locations: spring.config.location
 - Use spring.config.additional-location for overrides
+
+================================================================================
+3. SPRING MVC PERFORMANCE OPTIMIZATION
+================================================================================
+
+3.1 CONTROLLER OPTIMIZATION
+- Avoid @ModelAttribute for large objects
+- Use @ResponseBody with proper HTTP status codes
+- Implement proper exception handling with @ControllerAdvice
+- Use DTOs instead of entities in controllers
+
+3.2 VIEW RESOLVER OPTIMIZATION
+- Configure InternalResourceViewResolver with cache:
+  <property name="cache" value="true"/>
+- Use template caching in Thymeleaf: spring.thymeleaf.cache=true
+- Pre-compile templates in production
+
+3.3 STATIC RESOURCE HANDLING
+- Enable cache headers: spring.web.resources.cache.period=3600
+- Use CDN for static assets
+- Enable GZIP compression: server.compression.enabled=true
+- Configure resource chain caching: spring.web.resources.chain.cache=true
+
+3.4 REQUEST MAPPING
+- Use specific HTTP methods: @GetMapping, @PostMapping
+- Use path variables instead of query parameters when possible
+- Implement proper content negotiation with produces/consumes
+
+3.5 INTERCEPTOR OPTIMIZATION
+- Minimize interceptor logic
+- Use ordered interceptors to short-circuit early
+- Avoid expensive operations in preHandle
+
+3.6 ASYNCHRONOUS CONTROLLERS
+- Use @Async for long-running operations
+- Configure AsyncTaskExecutor with proper pool size
+- Use Callable<>, DeferredResult<>, or CompletableFuture<>
+- Configure timeout: spring.mvc.async.request-timeout=30000
+
+3.7 VALIDATION OPTIMIZATION
+- Use manual validation for simple cases
+- Cache validator instances
+- Use @Validated at class level for method validation
+- Disable Bean Validation if not needed: spring.validation.enabled=false
+
+3.8 EXCEPTION HANDLING
+- Use @ExceptionHandler for specific exceptions
+- Implement global exception handler with @ControllerAdvice
+- Return appropriate HTTP status codes
+- Avoid stack traces in production responses
