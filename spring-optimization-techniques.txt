@@ -286,3 +286,39 @@ TABLE OF CONTENTS
 - Use @EventListener for event handling
 - Configure @Async for event listeners
 - Use @TransactionalEventListener for transaction-bound events
+
+================================================================================
+7. CONNECTION POOLING
+================================================================================
+
+7.1 HTTP CLIENT POOLING
+- Configure Apache HttpClient with connection pool:
+  - MaxTotal: 200
+  - DefaultMaxPerRoute: 100
+- Use connection time-to-live
+- Enable keep-alive
+- Configure connection timeout, socket timeout
+
+7.2 DATABASE CONNECTION POOLING
+- HikariCP configuration:
+  - maximumPoolSize: (core_count * 2) + effective_spindle_count
+  - minimumIdle: same as maximumPoolSize for stable systems
+  - connectionTimeout: 30000ms
+  - idleTimeout: 600000ms
+  - maxLifetime: 1800000ms
+- Monitor pool metrics
+- Use validation query: SELECT 1
+
+7.3 REDIS CONNECTION POOLING
+- Configure lettuce pool:
+  spring.redis.lettuce.pool.max-active=8
+  spring.redis.lettuce.pool.max-idle=8
+  spring.redis.lettuce.pool.min-idle=0
+- Use connection timeout
+- Enable command timeout
+
+7.4 RABBITMQ CONNECTION POOLING
+- Configure connection factory with cache mode
+- Use channel pooling
+- Configure publisher confirms
+- Set appropriate prefetch count
