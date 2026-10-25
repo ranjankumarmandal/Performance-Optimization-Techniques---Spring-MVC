@@ -322,3 +322,51 @@ TABLE OF CONTENTS
 - Use channel pooling
 - Configure publisher confirms
 - Set appropriate prefetch count
+
+================================================================================
+8. HTTP & REST OPTIMIZATION
+================================================================================
+
+8.1 COMPRESSION
+- Enable GZIP: server.compression.enabled=true
+- Configure mime types: server.compression.mime-types=application/json,application/xml,text/html,text/xml,text/plain
+- Set minimum response size: server.compression.min-response-size=1024
+
+8.2 HTTP/2
+- Enable HTTP/2: server.http2.enabled=true
+- Requires SSL/TLS in most cases
+- Use ALPN for protocol negotiation
+
+8.3 KEEP-ALIVE
+- Configure keep-alive timeout: server.tomcat.keep-alive-timeout=30000
+- Set max keep-alive requests: server.tomcat.max-keep-alive-requests=100
+- Enable connection pooling
+
+8.4 HTTP CLIENT OPTIMIZATION
+- Use RestTemplate with connection pooling
+- Use WebClient for reactive (Spring 5+)
+- Configure timeouts:
+  - connection timeout
+  - read timeout
+  - write timeout
+- Use connection keep-alive
+
+8.5 API DESIGN
+- Use proper HTTP verbs (GET, POST, PUT, DELETE, PATCH)
+- Implement pagination for large datasets
+- Use field selection/projection
+- Implement rate limiting
+- Use API versioning
+
+8.6 JSON OPTIMIZATION
+- Use Jackson with proper configuration:
+  spring.jackson.serialization.write-dates-as-timestamps=false
+  spring.jackson.default-property-inclusion=non_null
+- Use @JsonView for partial serialization
+- Consider Protocol Buffers for high-performance scenarios
+- Use @JsonIgnore for sensitive data
+
+8.7 CONTENT NEGOTIATION
+- Configure content negotiation manager
+- Use produces/consumes in @RequestMapping
+- Implement custom message converters if needed
